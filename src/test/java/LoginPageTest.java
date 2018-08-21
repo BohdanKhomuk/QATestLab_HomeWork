@@ -22,8 +22,6 @@ public class LoginPageTest {
         driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS );
         driver.manage().window().maximize();
         driver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
-        //LoginPage loginPage = new LoginPage( driver );
-        //LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
     }
 
     @Test
