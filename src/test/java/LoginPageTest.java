@@ -1,82 +1,98 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+
 public class LoginPageTest {
 
-    private WebDriver driver;
-    private LoginPage loginPage;
+    public static EventFiringWebDriver eventDriver;
+    private static LoginPage loginPage;
+    private static MainPage mainPage;
+    private static final Logger LOG = LogManager.getLogger( EventHandler.class);
+
+
 
     @Before
-    public void setUp(){
-        String browser = new File( MainPage.class.getResource("/chromedriver.exe").getFile()).getPath();
+    public void firstClass() {
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        String browser = new File(LoginPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
         System.setProperty("webdriver.chrome.driver", browser);
-        driver = new ChromeDriver(  );
-        driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS );
-        driver.manage().window().maximize();
-        driver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
+        eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
+
+        EventHandler handler = new EventHandler();
+        eventDriver.manage().window().maximize();
+        eventDriver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+        eventDriver.register( handler );
+        eventDriver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
+
+        loginPage = new LoginPage( eventDriver );
+        mainPage = new MainPage( eventDriver );
     }
 
     @Test
-    public void errorEmail(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        LoginPage newLoginPage = loginPage.waringRegister("ерор_собачка_ерор", "test123");
-        String error = newLoginPage.getErrorEmail();
+    public void userLoginTest() {
+        LOG.info( (char) 27 + "[34mTest with incorrect email" + (char)27 + "[0m" );
+        loginPage.waringRegister("ерор_собачка_ерор", "test123");
+        String error = loginPage.getErrorEmail();
         Assert.assertEquals( "Пожалуйста, введите корректный адрес электронной почты.", error );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @Test
     public void emptyPassword(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        LoginPage newLoginPage = loginPage.waringRegister("test@gmail.com", " ");
-        String error = newLoginPage.getErrorPassword();
+        LOG.info( (char) 27 + "[34mTest with empty password" + (char)27 + "[0m" );
+        loginPage.waringRegister("test@gmail.com", " ");
+        String error = loginPage.getErrorPassword();
         Assert.assertEquals( "Это поле необходимо заполнить.", error );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @Test
     public void emptyEmailAndPassword(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        LoginPage newLoginPage = loginPage.waringRegister(" ", " ");
-        String errorEmail = newLoginPage.getErrorEmail();
-        String errorPassword = newLoginPage.getErrorPassword();
+        LOG.info( (char) 27 + "[34mTest with empty email and password" + (char)27 + "[0m" );
+        loginPage.waringRegister(" ", " ");
+        String errorEmail = loginPage.getErrorEmail();
+        String errorPassword = loginPage.getErrorPassword();
         Assert.assertEquals( "Это поле необходимо заполнить.", errorEmail );
         Assert.assertEquals( "Это поле необходимо заполнить.", errorPassword );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @Test
     public void loginWithEmptyCredsTest(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        LoginPage newLoginPage = loginPage.waringRegister("test@gmail.com", "test123");
-        String error = newLoginPage.getErrorText();
+        LOG.info( (char) 27 + "[34mTesting an account that does not have an account" + (char)27 + "[0m" );
+        loginPage.waringRegister("test@gmail.com", "test123");
+        String error = loginPage.getErrorText();
         Assert.assertEquals( "Обнаружена одна ошибка.", error );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @Test
     public void correctExit(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        MainPage mainPage = loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
+        LOG.info( (char) 27 + "[34mCheck the correct exit from the main page" + (char)27 + "[0m" );
+        loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
         LoginPage loginPage1 = mainPage.exitInLoginPage();
         String heading = loginPage.getHeadingText();
         Assert.assertEquals( "prestashop-automation", heading );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @Test
     public void enterAccTest(){
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        MainPage mainPage = loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
+        LOG.info( (char) 27 + "[34mTest correct enter in main page" + (char)27 + "[0m" );
+        loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
         String heading = mainPage.getMainText();
         Assert.assertEquals( "prestashop-automation", heading );
+        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
     @After
-    public void tearDown(){
-        driver.quit();
+    public void tearDown() {
+        eventDriver.quit();
     }
 }

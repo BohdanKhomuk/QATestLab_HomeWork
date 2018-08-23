@@ -1,3 +1,5 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -5,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -19,27 +22,36 @@ import java.util.concurrent.TimeUnit;
 
 public class MainPageTest {
 
-    private WebDriver driver;
-    private MainPage mainPage;
+    public static EventFiringWebDriver eventDriver;
+    private static LoginPage loginPage;
+    private static MainPage mainPage;
+    private static final Logger LOG = LogManager.getLogger( EventHandler.class);
+
+
 
     @Before
-    public void setUp(){
-        String browser = new File( LoginPage.class.getResource("/chromedriver.exe").getFile()).getPath();
+    public void firstClass() {
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        String browser = new File(MainPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
         System.setProperty("webdriver.chrome.driver", browser);
-        driver = new ChromeDriver(  );
-        driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS );
-        driver.manage().window().maximize();
-        driver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
+        eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
 
-        LoginPage loginPage = PageFactory.initElements( driver, LoginPage.class );
-        MainPage mainPage = loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
+        EventHandler handler = new EventHandler();
+        eventDriver.manage().window().maximize();
+        eventDriver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+        eventDriver.register( handler );
+        eventDriver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
+
+        loginPage = new LoginPage( eventDriver );
+        mainPage = new MainPage( eventDriver );
+
+        loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
     }
 
     @Test
     public void testForDashboardItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickDashboardItem();
-        driver.navigate().refresh();
+        mainPage.clickDashboardItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Пульт", correctTextInItem );
@@ -47,9 +59,8 @@ public class MainPageTest {
 
     @Test
     public void testForOrdersItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickOrdersItem();
-        driver.navigate().refresh();
+        mainPage.clickOrdersItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Заказы", correctTextInItem );
@@ -57,9 +68,8 @@ public class MainPageTest {
 
     @Test
     public void testForCatalogItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickCatalogItem();
-        driver.navigate().refresh();
+        mainPage.clickCatalogItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionElseHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "товары", correctTextInItem );
@@ -67,9 +77,8 @@ public class MainPageTest {
 
     @Test
     public void testForClientsItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickClientsItem();
-        driver.navigate().refresh();
+        mainPage.clickClientsItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Управление клиентами", correctTextInItem );
@@ -77,9 +86,8 @@ public class MainPageTest {
 
     @Test
     public void testForSupportServiceItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickSupportServiceItem();
-        driver.navigate().refresh();
+        mainPage.clickSupportServiceItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Customer Service", correctTextInItem );
@@ -87,9 +95,8 @@ public class MainPageTest {
 
     @Test
     public void testForStatisticsItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickStatisticsItem();
-        driver.navigate().refresh();
+        mainPage.clickStatisticsItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Статистика", correctTextInItem );
@@ -97,9 +104,8 @@ public class MainPageTest {
 
     @Test
     public void testForModulesItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickModulesItem();
-        driver.navigate().refresh();
+        mainPage.clickModulesItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionElseHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Выбор модуля", correctTextInItem );
@@ -107,9 +113,8 @@ public class MainPageTest {
 
     @Test
     public void testForDesignItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickDesignItem();
-        driver.navigate().refresh();
+        mainPage.clickDesignItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Шаблоны > Шаблон", correctTextInItem );
@@ -117,9 +122,8 @@ public class MainPageTest {
 
     @Test
     public void testForDeliveryItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickDeliveryItem();
-        driver.navigate().refresh();
+        mainPage.clickDeliveryItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Перевозчики", correctTextInItem );
@@ -127,9 +131,8 @@ public class MainPageTest {
 
     @Test
     public void testForPaymentMethodsItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickPaymentMethodsItem();
-        driver.navigate().refresh();
+        mainPage.clickPaymentMethodsItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Payment Methods", correctTextInItem );
@@ -137,9 +140,8 @@ public class MainPageTest {
 
     @Test
     public void testForInternationalItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickInternationalItem();
-        driver.navigate().refresh();
+        mainPage.clickInternationalItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Локализация", correctTextInItem );
@@ -147,9 +149,8 @@ public class MainPageTest {
 
     @Test
     public void testForShopParametersItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickShopParametersItem();
-        driver.navigate().refresh();
+        mainPage.clickShopParametersItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "General", correctTextInItem );
@@ -157,9 +158,8 @@ public class MainPageTest {
 
     @Test
     public void testForConfigurationItem(){
-        MainPage mainPage = PageFactory.initElements( driver, MainPage.class );
-        MainPage newMainPage = mainPage.clickConfigurationItem();
-        driver.navigate().refresh();
+        mainPage.clickConfigurationItem();
+        eventDriver.navigate().refresh();
         String correctTextInItem = mainPage.sectionHeaderItem();
         System.out.println( correctTextInItem );
         Assert.assertEquals( "Information", correctTextInItem );
@@ -167,7 +167,7 @@ public class MainPageTest {
 
     @After
     public void tearDown(){
-        driver.quit();
+        eventDriver.quit();
     }
 
 }
