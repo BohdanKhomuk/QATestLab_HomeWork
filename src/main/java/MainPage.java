@@ -1,5 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class MainPage {
 
@@ -9,12 +11,13 @@ public class MainPage {
         this.driver = driver;
     }
 
-    private By textFromMainPage = By.xpath( "//a[@id = 'header_shopname']" );
-    private By personIcon = By.xpath( "//li[@id = 'employee_infos']" );
-    private By exitButton = By.xpath( "//a[@id = 'header_logout']" );
+    private By textFromMainPage = By.id( "header_shopname" );
+    private By personIcon = By.id( "employee_infos" );
+    private By exitButton = By.id( "header_logout" );
     private By dashboardItem = By.xpath( "//li[@id ='tab-AdminDashboard']//span" );
     private By ordersItem = By.xpath( "//li[@id = 'subtab-AdminParentOrders']//span" );
     private By catalogItem = By.xpath( "//li[@id ='subtab-AdminCatalog']//span" );
+    private By categoryCatalog = By.xpath( "//li[@data-submenu = '11']/a" );
     private By clientsItem = By.xpath( "//li[@id ='subtab-AdminParentCustomer']//span" );
     private By supportServiceItem = By.xpath( "//li[@id ='subtab-AdminParentCustomerThreads']//span" );
     private By statisticsItem = By.xpath( "//li[@id ='subtab-AdminStats']//span" );
@@ -56,6 +59,14 @@ public class MainPage {
     public MainPage clickCatalogItem (){
         driver.findElement( catalogItem ).click();
         return new MainPage( driver );
+    }
+
+    public CatalogItemPage clickCatalogCategory(){
+        Actions actions = new Actions(driver);
+        WebElement element = driver.findElement( catalogItem );
+        actions.moveToElement(element).build().perform();
+        driver.findElement( categoryCatalog ).click();
+        return new CatalogItemPage( driver );
     }
 
     public MainPage clickClientsItem (){

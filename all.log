@@ -1,0 +1,65 @@
+2018-08-31 11:29:54.258 [main] DEBUG EventHandler - Should be By.xpath: //input[@id = 'email']
+2018-08-31 11:29:55.466 [main] DEBUG EventHandler - Element found
+2018-08-31 11:29:55.830 [main] DEBUG EventHandler - Should be By.xpath: //input[@id = 'passwd']
+2018-08-31 11:29:55.849 [main] DEBUG EventHandler - Element found
+2018-08-31 11:29:56.010 [main] DEBUG EventHandler - Should be By.xpath: //button[@tabindex = '4']
+2018-08-31 11:29:56.029 [main] DEBUG EventHandler - Element found
+2018-08-31 11:29:56.036 [main] DEBUG EventHandler - Should click button
+2018-08-31 11:29:56.150 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:29:56.196 [main] DEBUG EventHandler - Should be By.xpath: //li[@id ='subtab-AdminCatalog']//span
+2018-08-31 11:29:59.682 [main] DEBUG EventHandler - Element found
+2018-08-31 11:29:59.886 [main] DEBUG EventHandler - Should be By.xpath: //li[@data-submenu = '11']/a
+2018-08-31 11:29:59.954 [main] DEBUG EventHandler - Element found
+2018-08-31 11:29:59.974 [main] DEBUG EventHandler - Should click a
+2018-08-31 11:30:01.261 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:01.262 [main] INFO  EventHandler - [34mTest with empty name[0m
+2018-08-31 11:30:01.262 [main] DEBUG EventHandler - Should be By.xpath: //*[@id = 'page-header-desc-category-new_category']/i
+2018-08-31 11:30:01.299 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:01.310 [main] DEBUG EventHandler - Should click i
+2018-08-31 11:30:04.095 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:04.095 [main] DEBUG EventHandler - Should be By.id: name_1
+2018-08-31 11:30:04.124 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:04.169 [main] DEBUG EventHandler - Should be By.id: category_form_submit_btn
+2018-08-31 11:30:04.197 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:04.207 [main] DEBUG EventHandler - Should click button
+2018-08-31 11:30:06.202 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:06.202 [main] DEBUG EventHandler - Should be By.xpath:  //*[@id = 'content']/div[3]/div
+2018-08-31 11:30:06.263 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:06.338 [main] INFO  EventHandler - [32mTest passed[0m
+2018-08-31 11:30:22.016 [main] DEBUG EventHandler - Should be By.xpath: //input[@id = 'email']
+2018-08-31 11:30:22.056 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:22.577 [main] DEBUG EventHandler - Should be By.xpath: //input[@id = 'passwd']
+2018-08-31 11:30:22.599 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:22.817 [main] DEBUG EventHandler - Should be By.xpath: //button[@tabindex = '4']
+2018-08-31 11:30:22.838 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:22.843 [main] DEBUG EventHandler - Should click button
+2018-08-31 11:30:22.931 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:22.931 [main] DEBUG EventHandler - Should be By.xpath: //li[@id ='subtab-AdminCatalog']//span
+2018-08-31 11:30:25.934 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:26.008 [main] DEBUG EventHandler - Should be By.xpath: //li[@data-submenu = '11']/a
+2018-08-31 11:30:26.038 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:26.073 [main] DEBUG EventHandler - Should click a
+2018-08-31 11:30:27.057 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:27.058 [main] INFO  EventHandler - [34mTest correct registration[0m
+2018-08-31 11:30:27.058 [main] DEBUG EventHandler - Should be By.xpath: //*[@id = 'page-header-desc-category-new_category']/i
+2018-08-31 11:30:27.084 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:27.090 [main] DEBUG EventHandler - Should click i
+2018-08-31 11:30:30.831 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:30.832 [main] DEBUG EventHandler - Should be By.id: name_1
+2018-08-31 11:30:30.866 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:31.007 [main] DEBUG EventHandler - Should be By.id: category_form_submit_btn
+2018-08-31 11:30:31.026 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:31.035 [main] DEBUG EventHandler - Should click button
+2018-08-31 11:30:32.970 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:32.970 [main] DEBUG EventHandler - Should be By.xpath: //*[@id = 'content']/div[3]/div
+2018-08-31 11:30:33.010 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:33.057 [main] INFO  EventHandler - [32mNew category created[0m
+2018-08-31 11:30:33.058 [main] DEBUG EventHandler - Should be By.name: categoryFilter_name
+2018-08-31 11:30:33.086 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:33.388 [main] DEBUG EventHandler - Should be By.id: submitFilterButtoncategory
+2018-08-31 11:30:33.408 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:33.416 [main] DEBUG EventHandler - Should click button
+2018-08-31 11:30:34.414 [main] DEBUG EventHandler - Clicked successfull
+2018-08-31 11:30:34.414 [main] DEBUG EventHandler - Should be By.xpath: //*[@class = 'pointer'][1]
+2018-08-31 11:30:34.437 [main] DEBUG EventHandler - Element found
+2018-08-31 11:30:34.466 [main] INFO  EventHandler - [32mNew category found. Test passed[0m
