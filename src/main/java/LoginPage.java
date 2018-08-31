@@ -9,10 +9,10 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private By emailField = By.xpath("//input[@id = 'email']");
-    private By passwordField = By.xpath("//input[@id = 'passwd']");
+    private By emailField = By.id("email");
+    private By passwordField = By.id("passwd");
     private By singInButton = By.xpath("//button[@tabindex = '4']");
-    private By heading = By.xpath( "//*[@id = 'shop_name']" );
+    private By heading = By.id( "shop_name" );
     private By error = By.xpath( "//div[@id = 'error']/p" );
     private By errorPass = By.xpath( "//span[@for = 'passwd']" );
     private By errorEmail = By.xpath( "//span[@for = 'email']" );

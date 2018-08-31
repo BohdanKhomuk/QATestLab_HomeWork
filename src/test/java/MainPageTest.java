@@ -55,142 +55,93 @@ public class MainPageTest {
         LOG.info( (char) 27 + "[34mTest for item 'Dashboard'" + (char)27 + "[0m" );
         mainPage.clickDashboardItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
+        String correctTextInItemDashboard = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemDashboard + (char)27 + "[0m" );
+        Assert.assertEquals( "Пульт", correctTextInItemDashboard );
 
-        Assert.assertEquals( "Пульт", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
-
-    @Test
-    public void testForOrdersItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Orders'" + (char)27 + "[0m" );
         mainPage.clickOrdersItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Заказы", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemOrders = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemOrders + (char)27 + "[0m" );
+        Assert.assertEquals( "Заказы", correctTextInItemOrders );
 
-    @Test
-    public void testForCatalogItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Catalog'" + (char)27 + "[0m" );
         mainPage.clickCatalogItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionElseHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "товары", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemCatalog = mainPage.sectionElseHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemCatalog + (char)27 + "[0m" );
+        Assert.assertEquals( "товары", correctTextInItemCatalog);
 
-    @Test
-    public void testForClientsItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Client'" + (char)27 + "[0m" );
         mainPage.clickClientsItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Управление клиентами", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemClient = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemClient + (char)27 + "[0m" );
+        Assert.assertEquals( "Управление клиентами", correctTextInItemClient );
 
-    @Test
-    public void testForSupportServiceItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Support service'" + (char)27 + "[0m" );
         mainPage.clickSupportServiceItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Customer Service", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemSupportS = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemSupportS + (char)27 + "[0m" );
+        Assert.assertEquals( "Customer Service", correctTextInItemSupportS );
 
-    @Test
-    public void testForStatisticsItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Statistic'" + (char)27 + "[0m" );
         mainPage.clickStatisticsItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Статистика", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemStatic = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemStatic + (char)27 + "[0m" );
+        Assert.assertEquals( "Статистика", correctTextInItemStatic );
 
-    @Test
-    public void testForModulesItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Modules'" + (char)27 + "[0m" );
         mainPage.clickModulesItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionElseHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Выбор модуля", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemModules = mainPage.sectionElseHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemModules + (char)27 + "[0m" );
+        Assert.assertEquals( "Выбор модуля", correctTextInItemModules );
 
-    @Test
-    public void testForDesignItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Design'" + (char)27 + "[0m" );
         mainPage.clickDesignItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Шаблоны > Шаблон", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemDesign = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemDesign + (char)27 + "[0m" );
+        Assert.assertEquals( "Шаблоны > Шаблон", correctTextInItemDesign );
 
-    @Test
-    public void testForDeliveryItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Delivery'" + (char)27 + "[0m" );
         mainPage.clickDeliveryItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Перевозчики", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemDelivery = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemDelivery + (char)27 + "[0m" );
+        Assert.assertEquals( "Перевозчики", correctTextInItemDelivery );
 
-    @Test
-    public void testForPaymentMethodsItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Payment methods'" + (char)27 + "[0m" );
         mainPage.clickPaymentMethodsItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Payment Methods", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemPaymentM = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemPaymentM + (char)27 + "[0m" );
+        Assert.assertEquals( "Payment Methods", correctTextInItemPaymentM );
 
-    @Test
-    public void testForInternationalItem(){
         LOG.info( (char) 27 + "[34mTest for item 'International'" + (char)27 + "[0m" );
         mainPage.clickInternationalItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Локализация", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemInternational = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemInternational + (char)27 + "[0m" );
+        Assert.assertEquals( "Локализация", correctTextInItemInternational );
 
-    @Test
-    public void testForShopParametersItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Shop parameters'" + (char)27 + "[0m" );
         mainPage.clickShopParametersItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "General", correctTextInItem );
-        LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
-    }
+        String correctTextInItemShopP = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemShopP + (char)27 + "[0m" );
+        Assert.assertEquals( "General", correctTextInItemShopP );
 
-    @Test
-    public void testForConfigurationItem(){
         LOG.info( (char) 27 + "[34mTest for item 'Configuration'" + (char)27 + "[0m" );
         mainPage.clickConfigurationItem();
         eventDriver.navigate().refresh();
-        String correctTextInItem = mainPage.sectionHeaderItem();
-        System.out.println( (char) 27 + "[33mText item: " + correctTextInItem + (char)27 + "[0m" );
-        Assert.assertEquals( "Information", correctTextInItem );
+        String correctTextInItemConfiguration = mainPage.sectionHeaderItem();
+        System.out.println( (char) 27 + "[33mText item: " + correctTextInItemConfiguration + (char)27 + "[0m" );
+        Assert.assertEquals( "Information", correctTextInItemConfiguration );
         LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 

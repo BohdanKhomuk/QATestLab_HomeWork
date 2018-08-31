@@ -18,11 +18,11 @@ public class MainPage {
     private By ordersItem = By.xpath( "//li[@id = 'subtab-AdminParentOrders']//span" );
     private By catalogItem = By.xpath( "//li[@id ='subtab-AdminCatalog']//span" );
     private By categoryCatalog = By.xpath( "//li[@data-submenu = '11']/a" );
-    private By clientsItem = By.xpath( "//li[@id ='subtab-AdminParentCustomer']//span" );
+    private By clientsItem = By.linkText( "Клиенты" );
     private By supportServiceItem = By.xpath( "//li[@id ='subtab-AdminParentCustomerThreads']//span" );
     private By statisticsItem = By.xpath( "//li[@id ='subtab-AdminStats']//span" );
     private By modulesItem = By.xpath( "//li[@id ='subtab-AdminParentModulesSf']//span" );
-    private By designItem = By.xpath( "//li[@id ='subtab-AdminParentThemes']//span" );
+    private By designItem = By.linkText( "Design" );
     private By deliveryItem = By.xpath( "//li[@id ='subtab-AdminParentShipping']//span" );
     private By paymentMethodsItem = By.xpath( "//li[@id ='subtab-AdminParentPayment']//span" );
     private By internationalItem = By.xpath( "//li[@id ='subtab-AdminInternational']//span" );
