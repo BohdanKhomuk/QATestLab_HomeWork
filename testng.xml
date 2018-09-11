@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CrossBrowseTest">
+    <test name="ChromeTest">
+        <parameter name="browsers" value="chrome"/>
+        <packages>
+            <package name=".*"/>
+        </packages>
+    </test>
+    <test name="IE">
+        <parameter name="browsers" value="IE"/>
+        <packages>
+            <package name=".*"/>
+        </packages>
+    </test>
+    <test name="FireFox">
+        <parameter name="browsers" value="FireFox"/>
+        <packages>
+            <package name=".*"/>
+        </packages>
+    </test>
+</suite>

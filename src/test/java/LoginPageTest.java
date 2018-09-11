@@ -1,8 +1,12 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -10,38 +14,58 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginPageTest {
 
-    public static EventFiringWebDriver eventDriver;
+    protected EventFiringWebDriver eventDriver;
     private static LoginPage loginPage;
     private static MainPage mainPage;
     private static final Logger LOG = LogManager.getLogger( EventHandler.class);
+    RandomGeneration randomGeneration = new RandomGeneration();
 
 
+    @Parameters("browsers")
 
-    @Before
-    public void firstClass() {
-        System.setProperty("java.net.preferIPv4Stack", "true");
-        String browser = new File(LoginPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
-        System.setProperty("webdriver.chrome.driver", browser);
-        eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
+    @BeforeMethod
+    protected EventFiringWebDriver getEventDriver(String browsers){
+        if(browsers.equals( "chrome" )){
+            String browser = new File(LoginPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
+            System.setProperty("webdriver.chrome.driver", browser);
+            eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
+            }
+        else if(browsers.equals("IE")){
+            String browser = new File( LoginPageTest.class.getResource( "/IEDriverServer.exe" ).getFile()).getPath();
+            System.setProperty("webdriver.ie.driver", browser);
+            eventDriver = new EventFiringWebDriver( new InternetExplorerDriver(  ) );
+        }
+        else if(browsers.equals( "FireFox" )){
+            String browser = new File( LoginPageTest.class.getResource( "/geckodriver.exe" ).getFile() ).getPath();
+            System.setProperty( "webdriver.gecko.driver", browser );
+            eventDriver = new EventFiringWebDriver( new FirefoxDriver(  ) );
+            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability("marionette", true);
+            eventDriver = new EventFiringWebDriver( new FirefoxDriver( capabilities ) );
+        }
+
 
         EventHandler handler = new EventHandler();
         eventDriver.manage().window().maximize();
         eventDriver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         eventDriver.register( handler );
+
         eventDriver.get("http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/");
 
         loginPage = new LoginPage( eventDriver );
         mainPage = new MainPage( eventDriver );
-    }
 
+        return eventDriver;
+    }
     @Test
     public void userLoginTest() {
         LOG.info( (char) 27 + "[34mTest with incorrect email" + (char)27 + "[0m" );
-        loginPage.waringRegister("ерор_собачка_ерор", "test123");
+        loginPage.waringRegister("ерор_собачка_ерор", "Xcg7299bnSmMuRLp9ITw");
         String error = loginPage.getErrorEmail();
         Assert.assertEquals( "Пожалуйста, введите корректный адрес электронной почты.", error );
         LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
+
 
     @Test
     public void emptyPassword(){
@@ -91,7 +115,7 @@ public class LoginPageTest {
         LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
 
-    @After
+    @AfterMethod
     public void tearDown() {
         eventDriver.quit();
     }

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage {
 
     public WebDriver driver;
+    TimePause timePause = new TimePause();
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -18,6 +19,7 @@ public class LoginPage {
     private By errorEmail = By.xpath( "//span[@for = 'email']" );
 
     public LoginPage typeUserEmail(String username){
+        timePause.userDelay( 2000 );
         driver.findElement( emailField).sendKeys( username );
         return this;
     }

@@ -1,42 +1,47 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import test.tmp.verify.Verify;
-import test.tmp.verify.VerifyTest;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-/*Добрый день!
-* На счет автотеста не было никакой конкретики, на сколько этапав надо разделить, тому сделал для каждого пункта свой тест.
-* Если этот подход будет не правильным, то оповестите пожалуйста и я все переделаю, там это уже не так и сложно сделать.
-* С уважением Хомук Богдан
-* емаил: bohdankhomuk@gmail.com*
-* Хорошего Вам дня!
-* */
-
 public class MainPageTest {
 
-    public static EventFiringWebDriver eventDriver;
+    protected EventFiringWebDriver eventDriver;
     private static LoginPage loginPage;
     private static MainPage mainPage;
     private static final Logger LOG = LogManager.getLogger( EventHandler.class);
 
+    @Parameters("browsers")
 
 
-    @Before
-    public void firstClass() {
-        System.setProperty("java.net.preferIPv4Stack", "true");
-        String browser = new File(MainPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
-        System.setProperty("webdriver.chrome.driver", browser);
-        eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
+    @BeforeMethod
+    protected EventFiringWebDriver getEventDriver(String browsers){
+        if(browsers.equals( "chrome" )){
+             String browser = new File(MainPageTest.class.getResource("/chromedriver.exe").getFile()).getPath();
+             System.setProperty("webdriver.chrome.driver", browser);
+             eventDriver = new EventFiringWebDriver(new ChromeDriver(  ));
+            }
+        else if(browsers.equals("IE")){
+             String browser = new File( MainPageTest.class.getResource( "/IEDriverServer.exe" ).getFile()).getPath();
+             System.setProperty("webdriver.ie.driver", browser);
+             eventDriver = new EventFiringWebDriver( new InternetExplorerDriver(  ) );
+        }
+        else if(browsers.equals( "FireFox" )){
+            String browser = new File( MainPageTest.class.getResource( "/geckodriver.exe" ).getFile() ).getPath();
+            System.setProperty( "webdriver.gecko.driver", browser );
+            eventDriver = new EventFiringWebDriver( new FirefoxDriver(  ) );
+            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability("marionette", true);
+            eventDriver = new EventFiringWebDriver( new FirefoxDriver( capabilities ) );
+        }
+
 
         EventHandler handler = new EventHandler();
         eventDriver.manage().window().maximize();
@@ -48,7 +53,9 @@ public class MainPageTest {
         mainPage = new MainPage( eventDriver );
 
         loginPage.correctRegister( "webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw" );
-    }
+
+        return eventDriver;
+        }
 
     @Test
     public void testForDashboardItem(){
@@ -144,8 +151,7 @@ public class MainPageTest {
         Assert.assertEquals( "Information", correctTextInItemConfiguration );
         LOG.info( (char) 27 + "[32mTest passed" + (char)27 + "[0m" );
     }
-
-    @After
+    @AfterMethod
     public void tearDown(){
         eventDriver.quit();
     }

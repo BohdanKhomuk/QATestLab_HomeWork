@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 public class MainPage {
 
     public WebDriver driver;
+    TimePause timePause = new TimePause();
 
     public MainPage(WebDriver driver){
         this.driver = driver;
@@ -17,7 +18,8 @@ public class MainPage {
     private By dashboardItem = By.xpath( "//li[@id ='tab-AdminDashboard']//span" );
     private By ordersItem = By.xpath( "//li[@id = 'subtab-AdminParentOrders']//span" );
     private By catalogItem = By.xpath( "//li[@id ='subtab-AdminCatalog']//span" );
-    private By categoryCatalog = By.xpath( "//li[@data-submenu = '11']/a" );
+    private By categoryProducts = By.id( "subtab-AdminProducts" );
+    private By categoryCatalog = By.id( "subtab-AdminCategories" );
     private By clientsItem = By.linkText( "Клиенты" );
     private By supportServiceItem = By.xpath( "//li[@id ='subtab-AdminParentCustomerThreads']//span" );
     private By statisticsItem = By.xpath( "//li[@id ='subtab-AdminStats']//span" );
@@ -61,12 +63,20 @@ public class MainPage {
         return new MainPage( driver );
     }
 
-    public CatalogItemPage clickCatalogCategory(){
+    public CatalogItemProducts clickCatalogProducts(){
+        Actions actions = new Actions(driver);
+        WebElement element = driver.findElement( catalogItem );
+        actions.moveToElement(element).build().perform();
+        driver.findElement( categoryProducts ).click();
+        return new CatalogItemProducts( driver );
+    }
+
+    public CatalogItemCategories clickCatalogCategory(){
         Actions actions = new Actions(driver);
         WebElement element = driver.findElement( catalogItem );
         actions.moveToElement(element).build().perform();
         driver.findElement( categoryCatalog ).click();
-        return new CatalogItemPage( driver );
+        return new CatalogItemCategories( driver );
     }
 
     public MainPage clickClientsItem (){
@@ -120,10 +130,12 @@ public class MainPage {
     }
 
     public String sectionHeaderItem (){
+        timePause.userDelay( 5000 );
         return driver.findElement( itemText ).getText();
     }
 
     public String sectionElseHeaderItem(){
+        timePause.userDelay( 5000 );
         return driver.findElement( elseItemText ).getText();
     }
 
